@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VYRO | تيشيرتات</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="header">
+  <a class="logo" href="#">VYRO</span></a>
+  <nav>
+    <a href="#products">المنتجات</a>
+    <a href="#about">عن البراند</a>
+    <a href="#contact">تواصل معنا</a>
+  </nav>
+  <button class="cart-btn" onclick="toggleCart()">🛒 السلة <b id="cartCount">0</b></button>
+</header>
+
+<section class="hero">
+  <div>
+    <p class="eyebrow">NEW COLLECTION</p>
+    <h1>البس ستايلك<br><span>بطريقتك.</span></h1>
+    <p>تيشيرتات بتصميمات مميزة وجودة تقدر تعتمد عليها.</p>
+    <a href="#products" class="primary">تسوق الآن</a>
+  </div>
+  <div class="hero-card">
+    <div class="shirt">VYRO</div>
+  </div>
+</section>
+
+<section id="products" class="section">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">OUR COLLECTION</p>
+      <h2>اختار تصميمك</h2>
+    </div>
+    <div class="filters">
+      <button class="filter active" data-filter="all">الكل</button>
+      <button class="filter" data-filter="oversize">أوفر سايز</button>
+      <button class="filter" data-filter="basic">Basic</button>
+    </div>
+  </div>
+  <div id="productGrid" class="grid"></div>
+</section>
+
+<section id="about" class="about">
+  <div>
+    <p class="eyebrow">ABOUT US</p>
+    <h2>تيشيرت معمول ليك.</h2>
+  </div>
+</section>
+
+<footer id="contact">
+  <div>
+    <strong>VYRO</strong>
+    <p>تابعنا واطلب تصميمك المفضل.</p>
+  </div>
+  <div class="social">Instagram · Facebook · WhatsApp . tiktok
+    <div class="social">vyro382@gmail.com</div>
+  </div>
+</footer>
+<aside id="cart" class="cart">
+  <div class="cart-head"><h3>سلة المشتريات</h3><button onclick="toggleCart()">×</button></div>
+  <div id="cartItems"></div>
+  <div class="cart-total"><span>الإجمالي</span><b id="cartTotal">0 ج.م</b></div>
+  <button class="checkout" onclick="checkout()">اطلب عبر واتساب</button>
+</aside>
+<div id="overlay" class="overlay" onclick="toggleCart()"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
