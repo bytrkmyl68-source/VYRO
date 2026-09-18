@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VYRO | تيشيرتات</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="order.css">
 </head>
 <body>
 <header class="header">
@@ -25,12 +24,17 @@
     <p>تيشيرتات بتصميمات مميزة وجودة تقدر تعتمد عليها.</p>
     <a href="#products" class="primary">تسوق الآن</a>
   </div>
-  <div class="hero-card"><div class="shirt">VYRO</div></div>
+  <div class="hero-card">
+    <div class="shirt">VYRO</div>
+  </div>
 </section>
 
 <section id="products" class="section">
   <div class="section-head">
-    <div><p class="eyebrow">OUR COLLECTION</p><h2>اختار تصميمك</h2></div>
+    <div>
+      <p class="eyebrow">OUR COLLECTION</p>
+      <h2>اختار تصميمك</h2>
+    </div>
     <div class="filters">
       <button class="filter active" data-filter="all">الكل</button>
       <button class="filter" data-filter="oversize">أوفر سايز</button>
@@ -40,32 +44,35 @@
   <div id="productGrid" class="grid"></div>
 </section>
 
-<section id="about" class="about"><div><p class="eyebrow">ABOUT US</p><h2>تيشيرت معمول ليك.</h2></div></section>
-<footer id="contact"><div><strong>VYRO</strong><p>تابعنا واطلب تصميمك المفضل.</p></div><div class="social">Instagram · Facebook · WhatsApp · TikTok<div class="social">vyro382@gmail.com</div></div></footer>
+<section id="about" class="about">
+  <div>
+    <p class="eyebrow">ABOUT US</p>
+    <h2>تيشيرت معمول ليك.</h2>
+  </div>
+</section>
+
+<footer id="contact">
+  <div>
+    <strong>VYRO</strong>
+    <p>تابعنا واطلب تصميمك المفضل.</p>
+  </div>
+
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/vyro541?stkn=MmNwaTFqMm83a3Q2" target="_blank" rel="noopener noreferrer" class="social-btn insta" aria-label="Instagram">◎</a>
+    <a href="https://www.tiktok.com/@vyro0788?_r=1&_t=ZS-99pbRSCWPDA" target="_blank" rel="noopener noreferrer" class="social-btn tiktok" aria-label="TikTok">♪</a>
+    <a href="https://wa.me/201001648519" target="_blank" rel="noopener noreferrer" class="social-btn whatsapp" aria-label="WhatsApp">✆</a>
+    <a href="mailto:vyro382@gmail.com" class="social-btn email" aria-label="Email">✉</a>
+  </div>
+</footer>
 
 <aside id="cart" class="cart">
   <div class="cart-head"><h3>سلة المشتريات</h3><button onclick="toggleCart()">×</button></div>
   <div id="cartItems"></div>
   <div class="cart-total"><span>الإجمالي</span><b id="cartTotal">0 ج.م</b></div>
-  <button class="checkout" onclick="checkout()">اطلب الآن</button>
+  <button class="checkout" onclick="checkout()">اطلب عبر واتساب</button>
 </aside>
 <div id="overlay" class="overlay" onclick="toggleCart()"></div>
 
-<div id="orderModal" class="order-modal" aria-hidden="true">
-  <div class="order-card" role="dialog" aria-modal="true" aria-labelledby="orderTitle">
-    <button class="order-close" type="button" onclick="closeOrderForm()">×</button>
-    <p class="eyebrow">COMPLETE YOUR ORDER</p>
-    <h2 id="orderTitle">بيانات الطلب</h2>
-    <p class="order-note">اكتب بياناتك لإتمام الطلب عبر واتساب.</p>
-    <form id="orderForm">
-      <label>الاسم الكامل<input id="customerName" required maxlength="80" autocomplete="name" placeholder="اكتب اسمك"></label>
-      <label>رقم الهاتف<input id="customerPhone" required type="tel" maxlength="20" autocomplete="tel" placeholder="01xxxxxxxxx"></label>
-      <label>العنوان بالتفصيل<textarea id="customerAddress" required maxlength="250" rows="3" autocomplete="street-address" placeholder="المحافظة، المنطقة، الشارع، رقم المنزل"></textarea></label>
-      <button class="primary order-submit" type="submit">إرسال الطلب عبر واتساب</button>
-      <p id="orderMessage" class="order-message" role="alert"></p>
-    </form>
-  </div>
-</div>
 <script src="script.js"></script>
 </body>
 </html>
