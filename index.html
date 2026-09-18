@@ -1,71 +1,21 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VYRO | تيشيرتات</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="order.css">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="VYRO — أزياء يومية بتصميم جريء وجودة عالية.">
+  <title>VYRO — wear your edge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="order.css">
 </head>
 <body>
-<header class="header">
-  <a class="logo" href="#">VYRO</a>
-  <nav>
-    <a href="#products">المنتجات</a>
-    <a href="#about">عن البراند</a>
-    <a href="#contact">تواصل معنا</a>
-  </nav>
-  <button class="cart-btn" onclick="toggleCart()">🛒 السلة <b id="cartCount">0</b></button>
-</header>
-
-<section class="hero">
-  <div>
-    <p class="eyebrow">NEW COLLECTION</p>
-    <h1>البس ستايلك<br><span>بطريقتك.</span></h1>
-    <p>تيشيرتات بتصميمات مميزة وجودة تقدر تعتمد عليها.</p>
-    <a href="#products" class="primary">تسوق الآن</a>
-  </div>
-  <div class="hero-card"><div class="shirt">VYRO</div></div>
-</section>
-
-<section id="products" class="section">
-  <div class="section-head">
-    <div><p class="eyebrow">OUR COLLECTION</p><h2>اختار تصميمك</h2></div>
-    <div class="filters">
-      <button class="filter active" data-filter="all">الكل</button>
-      <button class="filter" data-filter="oversize">أوفر سايز</button>
-      <button class="filter" data-filter="basic">Basic</button>
-    </div>
-  </div>
-  <div id="productGrid" class="grid"></div>
-</section>
-
-<section id="about" class="about"><div><p class="eyebrow">ABOUT US</p><h2>تيشيرت معمول ليك.</h2></div></section>
-<footer id="contact"><div><strong>VYRO</strong><p>تابعنا واطلب تصميمك المفضل.</p></div><div class="social">Instagram · Facebook · WhatsApp · TikTok<div class="social">vyro382@gmail.com</div></div></footer>
-
-<aside id="cart" class="cart">
-  <div class="cart-head"><h3>سلة المشتريات</h3><button onclick="toggleCart()">×</button></div>
-  <div id="cartItems"></div>
-  <div class="cart-total"><span>الإجمالي</span><b id="cartTotal">0 ج.م</b></div>
-  <button class="checkout" onclick="checkout()">اطلب الآن</button>
-</aside>
-<div id="overlay" class="overlay" onclick="toggleCart()"></div>
-
-<div id="orderModal" class="order-modal" aria-hidden="true">
-  <div class="order-card" role="dialog" aria-modal="true" aria-labelledby="orderTitle">
-    <button class="order-close" type="button" onclick="closeOrderForm()">×</button>
-    <p class="eyebrow">COMPLETE YOUR ORDER</p>
-    <h2 id="orderTitle">بيانات الطلب</h2>
-    <p class="order-note">اكتب بياناتك لإتمام الطلب عبر واتساب.</p>
-    <form id="orderForm">
-      <label>الاسم الكامل<input id="customerName" required maxlength="80" autocomplete="name" placeholder="اكتب اسمك"></label>
-      <label>رقم الهاتف<input id="customerPhone" required type="tel" maxlength="20" autocomplete="tel" placeholder="01xxxxxxxxx"></label>
-      <label>العنوان بالتفصيل<textarea id="customerAddress" required maxlength="250" rows="3" autocomplete="street-address" placeholder="المحافظة، المنطقة، الشارع، رقم المنزل"></textarea></label>
-      <button class="primary order-submit" type="submit">إرسال الطلب عبر واتساب</button>
-      <p id="orderMessage" class="order-message" role="alert"></p>
-    </form>
-  </div>
-</div>
-<script src="script.js"></script>
-</body>
-</html>
+<header class="header"><a class="logo" href="#top">VYRO<span>.</span></a><nav><a href="#products">المتجر</a><a href="#story">قصتنا</a><a href="#contact">تواصل</a></nav><div class="header-actions"><button id="accountBtn" class="account-btn" type="button">حسابي</button><button class="cart-btn" onclick="toggleCart()">السلة <b id="cartCount">0</b></button><button class="menu-btn" onclick="document.body.classList.toggle('nav-open')">☰</button></div></header>
+<main id="top">
+<section class="hero"><div class="hero-copy"><p class="eyebrow">DROP 04 — EVERYDAY UNIFORM</p><h1>ستايلك<br><em>بصوت أعلى.</em></h1><p class="hero-text">قطع أساسية بلمسة جريئة. خامات مريحة، قصّات محسوبة، وتصميم معمول عشان يعيش معاك.</p><a href="#products" class="primary">اكتشف المجموعة <span>←</span></a><div class="trust"><span>✦ شحن سريع</span><span>✦ استبدال سهل</span><span>✦ جودة مضمونة</span></div></div><div class="hero-art"><div class="art-label">VYRO / 2025</div><div class="art-shirt">VYRO</div><div class="art-stamp">NEW<br>DROP</div></div></section>
+<section id="products" class="section"><div class="section-head"><div><p class="eyebrow">THE COLLECTION</p><h2>اختار قطعتك</h2></div><div class="filters"><button class="filter active" data-filter="all">الكل</button><button class="filter" data-filter="basic">أساسي</button><button class="filter" data-filter="oversize">أوفر سايز</button></div></div><div id="productGrid" class="grid"></div></section>
+<section id="story" class="story"><div><p class="eyebrow">WHY VYRO?</p><h2>مش مجرد<br><em>تيشيرت.</em></h2></div><div class="story-copy"><p>VYRO هو الزي اليومي للناس اللي بتحب تسيب أثر. بنصمم قطع بسيطة، لكن مستحيل تتنسي.</p><div class="story-numbers"><div><strong>01</strong><span>خامات مختارة</span></div><div><strong>02</strong><span>تصميم مصري</span></div><div><strong>03</strong><span>مصنوع ليعيش</span></div></div></div></section>
+</main><footer id="contact"><div><a class="logo" href="#top">VYRO<span>.</span></a><p>wear your edge.</p></div><div class="footer-links"><a href="#products">المتجر</a><a href="admin.html">لوحة الإدارة</a><a href="mailto:hello@vyro.store">hello@vyro.store</a></div><small>© 2025 VYRO. كل الحقوق محفوظة.</small></footer>
+<aside id="cart" class="cart"><div class="cart-head"><div><p class="eyebrow">YOUR BAG</p><h3>سلة المشتريات</h3></div><button onclick="toggleCart()">×</button></div><div id="cartItems"></div><div class="cart-bottom"><div><span>الإجمالي</span><b id="cartTotal">0 ج.م</b></div><button class="checkout" onclick="checkout()">إتمام الطلب <span>←</span></button></div></aside><div id="overlay" class="overlay" onclick="toggleCart()"></div>
+<div id="authModal" class="modal" aria-hidden="true"><div class="modal-card"><button class="modal-close" onclick="closeAuth()">×</button><p class="eyebrow">WELCOME TO VYRO</p><h2 id="authTitle">اعمل حسابك</h2><p class="modal-note">سجّل حسابك عشان تتابع طلباتك وتكمل الشراء أسرع.</p><form id="authForm"><label>الاسم الكامل<input id="authName" required maxlength="80" placeholder="مثال: أحمد محمد"></label><label>البريد الإلكتروني<input id="authEmail" required type="email" autocomplete="email" placeholder="you@email.com"></label><label id="passwordLabel">كلمة المرور<input id="authPassword" required type="password" minlength="6" placeholder="6 أحرف على الأقل"></label><button class="primary full" type="submit">إنشاء الحساب والمتابعة</button><p id="authMessage" class="form-message"></p></form></div></div>
+<div id="orderModal" class="modal" aria-hidden="true"><div class="modal-card"><button class="modal-close" onclick="closeOrderForm()">×</button><p class="eyebrow">LAST STEP</p><h2>بيانات التوصيل</h2><p class="modal-note" id="signedInAs"></p><form id="orderForm"><label>رقم الهاتف<input id="customerPhone" required type="tel" maxlength="20" placeholder="01xxxxxxxxx"></label><label>العنوان بالتفصيل<textarea id="customerAddress" required maxlength="250" rows="3" placeholder="المحافظة، المنطقة، الشارع"></textarea></label><button class="primary full" type="submit">تأكيد الطلب <span>←</span></button><p id="orderMessage" class="form-message"></p></form></div></div>
+<script src="script.js"></script></body></html>
