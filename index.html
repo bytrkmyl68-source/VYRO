@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VYRO | تيشيرتات</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="order.css">
 </head>
 <body>
 <header class="header">
@@ -40,21 +41,31 @@
 </section>
 
 <section id="about" class="about"><div><p class="eyebrow">ABOUT US</p><h2>تيشيرت معمول ليك.</h2></div></section>
-
-<footer id="contact">
-  <div><strong>VYRO</strong><p>تابعنا واطلب تصميمك المفضل.</p></div>
-  <div class="social">Instagram · Facebook · WhatsApp . tiktok
-    <div class="social">vyro382@gmail.com</div>
-  </div>
-</footer>
+<footer id="contact"><div><strong>VYRO</strong><p>تابعنا واطلب تصميمك المفضل.</p></div><div class="social">Instagram · Facebook · WhatsApp · TikTok<div class="social">vyro382@gmail.com</div></div></footer>
 
 <aside id="cart" class="cart">
   <div class="cart-head"><h3>سلة المشتريات</h3><button onclick="toggleCart()">×</button></div>
   <div id="cartItems"></div>
   <div class="cart-total"><span>الإجمالي</span><b id="cartTotal">0 ج.م</b></div>
-  <button class="checkout" onclick="checkout()">اطلب عبر واتساب</button>
+  <button class="checkout" onclick="checkout()">اطلب الآن</button>
 </aside>
 <div id="overlay" class="overlay" onclick="toggleCart()"></div>
+
+<div id="orderModal" class="order-modal" aria-hidden="true">
+  <div class="order-card" role="dialog" aria-modal="true" aria-labelledby="orderTitle">
+    <button class="order-close" type="button" onclick="closeOrderForm()">×</button>
+    <p class="eyebrow">COMPLETE YOUR ORDER</p>
+    <h2 id="orderTitle">بيانات الطلب</h2>
+    <p class="order-note">اكتب بياناتك لإتمام الطلب عبر واتساب.</p>
+    <form id="orderForm">
+      <label>الاسم الكامل<input id="customerName" required maxlength="80" autocomplete="name" placeholder="اكتب اسمك"></label>
+      <label>رقم الهاتف<input id="customerPhone" required type="tel" maxlength="20" autocomplete="tel" placeholder="01xxxxxxxxx"></label>
+      <label>العنوان بالتفصيل<textarea id="customerAddress" required maxlength="250" rows="3" autocomplete="street-address" placeholder="المحافظة، المنطقة، الشارع، رقم المنزل"></textarea></label>
+      <button class="primary order-submit" type="submit">إرسال الطلب عبر واتساب</button>
+      <p id="orderMessage" class="order-message" role="alert"></p>
+    </form>
+  </div>
+</div>
 <script src="script.js"></script>
 </body>
 </html>
