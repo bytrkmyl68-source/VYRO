@@ -14,7 +14,7 @@ let currentFilter = "all";
 function renderProducts(){
   const grid=document.getElementById("productGrid");
   const list=products.filter(p=>p.active!==false&&(currentFilter==="all"||p.category===currentFilter));
-  grid.innerHTML=list.map(p=>`<article class="product"><div class="product-img">${p.image?`<img src="${p.image}" alt="${p.name}">`:`<div class="placeholder">YOUR<br>BRAND</div>`}</div><div class="product-info"><h3>${p.name}</h3><div class="muted">${p.category==="oversize"?"Oversize":"Basic"} · ${p.stock>0?"متوفر":"غير متوفر"}</div><div class="price">${p.price} ج.م</div><button class="add" ${p.stock<=0?"disabled":""} onclick="addToCart(${p.id})">أضف للسلة</button></div></article>`).join("");
+  grid.innerHTML=list.map(p=>`<article class="product"><div class="product-img">${p.image?`<img src="${p.image}" alt="${p.name}">`:`<div class="placeholder">VYRO</div>`}</div><div class="product-info"><h3>${p.name}</h3><div class="muted">${p.category==="oversize"?"Oversize":"Basic"} · ${p.stock>0?"متوفر":"غير متوفر"}</div><div class="price">${p.price} ج.م</div><button class="add" ${p.stock<=0?"disabled":""} onclick="addToCart(${p.id})">أضف للسلة</button></div></article>`).join("");
 }
 function addToCart(id){const p=products.find(x=>x.id===id);if(!p||p.stock<=0)return;const item=cart.find(x=>x.id===id);if(item)item.qty++;else cart.push({id,qty:1});saveCart();renderCart();toggleCart(true)}
 function saveCart(){localStorage.setItem("cart",JSON.stringify(cart))}
