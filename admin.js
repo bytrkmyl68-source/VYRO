@@ -1,153 +1,141 @@
-<!doctype html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VYRO | لوحة التحكم</title>
-  <link rel="stylesheet" href="admin.css" />
-</head>
-<body>
-  <div id="loginScreen" class="auth-screen">
-    <div class="auth-card">
-      <p class="eyebrow">VYRO CONTROL</p>
-      <h1>تسجيل الدخول</h1>
-      <form id="loginForm">
-        <label>كلمة المرور
-          <input id="passwordInput" type="password" placeholder="أدخل كلمة المرور" required />
-        </label>
-        <button type="submit" class="primary">دخول</button>
-        <p id="loginMessage" class="message" aria-live="polite"></p>
-      </form>
-    </div>
-  </div>
+const STORAGE_KEY = "vyro_products";
+const ADMIN_PASSWORD = "vyro246875319010vyro";
+const SESSION_KEY = "vyro_admin_session";
+const defaults = [
+  {id:1,name:"Black Logo Tee",category:"basic",price:450,stock:10,image:"",description:"",active:true},
+  {id:2,name:"Oversize Street",category:"oversize",price:550,stock:10,image:"",description:"",active:true},
+  {id:3,name:"Minimal White",category:"basic",price:450,stock:10,image:"",description:"",active:true},
+  {id:4,name:"Urban Oversize",category:"oversize",price:550,stock:10,image:"",description:"",active:true},
+  {id:5,name:"Classic Black",category:"basic",price:425,stock:10,image:"",description:"",active:true},
+  {id:6,name:"Graphic Oversize",category:"oversize",price:575,stock:10,image:"",description:"",active:true}
+];
 
-  <main id="adminApp" class="admin-shell hidden">
-    <header class="admin-header">
-      <div>
-        <span class="eyebrow">VYRO CONTROL</span>
-        <h1>إدارة المنتجات</h1>
-      </div>
-      <div class="header-actions">
-        <a class="store-link" href="index.html">عرض المتجر</a>
-        <button id="logoutBtn" class="secondary" type="button">تسجيل الخروج</button>
-      </div>
-    </header>
+let products = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null") || defaults;
+let editingId = null;
 
-    <section class="stats">
-      <article>
-        <span>إجمالي المنتجات</span>
-        <strong id="totalProducts">0</strong>
-      </article>
-      <article>
-        <span>منتجات ظاهرة</span>
-        <strong id="activeProducts">0</strong>
-      </article>
-      <article>
-        <span>إجمالي المخزون</span>
-        <strong id="totalStock">0</strong>
-      </article>
-    </section>
+const $ = id => document.getElementById(id);
+const save = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+const money = value => `${Number(value).toLocaleString("ar-EG")} ج.م`;
+const escapeHtml = value => String(value).replace(/[&<>\"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
-    <section class="panel">
-      <div class="panel-head">
-        <h2 id="formTitle">إضافة منتج جديد</h2>
-        <button id="cancelEdit" class="secondary hidden" type="button">إلغاء التعديل</button>
-      </div>
+function showApp() {
+  $("loginScreen").classList.add("hidden");
+  $("adminApp").classList.remove("hidden");
+  render();
+}
 
-      <form id="productForm">
-        <input type="hidden" id="productId" />
-        <div class="form-grid">
-          <label>اسم المنتج
-            <input id="name" required maxlength="80" placeholder="مثال: Black Logo Tee" />
-          </label>
+$("loginForm").onsubmit = event => {
+  event.preventDefault();
+  const message = $("loginMessage");
+  const entered = $("passwordInput").value;
 
-          <label>التصنيف
-            <select id="category">
-              <option value="basic">Basic</option>
-              <option value="oversize">Oversize</option>
-            </select>
-          </label>
+  if (entered === ADMIN_PASSWORD) {
+    sessionStorage.setItem(SESSION_KEY, "1");
+    message.textContent = "";
+    message.classList.remove("error");
+    showApp();
+  } else {
+    message.textContent = "كلمة المرور غير صحيحة";
+    message.classList.add("error");
+    $("passwordInput").select();
+  }
+};
 
-          <label>السعر (ج.م)
-            <input id="price" required min="0" type="number" />
-          </label>
+$("logoutBtn").onclick = () => {
+  sessionStorage.removeItem(SESSION_KEY);
+  location.reload();
+};
 
-          <label>المخزون
-            <input id="stock" required min="0" type="number" value="0" />
-          </label>
+function render() {
+  const query = $("search").value.trim().toLowerCase();
+  const visible = products.filter(p => p.name.toLowerCase().includes(query));
 
-          <label class="wide">رابط الصورة
-            <input id="image" type="url" placeholder="https://..." />
-          </label>
-
-          <label class="wide">الوصف
-            <textarea id="description" rows="2" placeholder="وصف مختصر للمنتج"></textarea>
-          </label>
+  $("productsTable").innerHTML = visible.map(p => `
+    <tr>
+      <td>
+        <div class="product-cell">
+          ${p.image ? `<img src="${escapeHtml(p.image)}" alt="">` : `<span class="thumb">V</span>`}
+          <b>${escapeHtml(p.name)}</b>
         </div>
+      </td>
+      <td>${p.category === "oversize" ? "Oversize" : "Basic"}</td>
+      <td>${money(p.price)}</td>
+      <td>${p.stock}</td>
+      <td><span class="status ${p.active ? "on" : "off"}">${p.active ? "ظاهر" : "مخفي"}</span></td>
+      <td class="actions">
+        <button onclick="editProduct(${p.id})">تعديل</button>
+        <button class="danger" onclick="deleteProduct(${p.id})">حذف</button>
+      </td>
+    </tr>
+  `).join("");
 
-        <label class="check">
-          <input id="active" type="checkbox" checked />
-          <span>إظهار المنتج في المتجر</span>
-        </label>
+  $("empty").classList.toggle("hidden", visible.length !== 0);
+  $("totalProducts").textContent = products.length;
+  $("activeProducts").textContent = products.filter(p => p.active).length;
+  $("totalStock").textContent = products.reduce((sum, p) => sum + Number(p.stock || 0), 0);
+}
 
-        <button class="primary" type="submit">حفظ المنتج</button>
-        <p id="formMessage" class="message" aria-live="polite"></p>
-      </form>
-    </section>
+function editProduct(id) {
+  const p = products.find(item => item.id === id);
+  if (!p) return;
 
-    <section class="panel">
-      <div class="panel-head">
-        <h2>المنتجات</h2>
-        <input id="search" class="search" placeholder="ابحث عن منتج..." />
-      </div>
+  editingId = id;
+  ["name", "category", "price", "stock", "image", "description"].forEach(k => $(k).value = p[k] ?? "");
+  $("active").checked = p.active;
+  $("formTitle").textContent = "تعديل المنتج";
+  $("cancelEdit").classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>المنتج</th>
-              <th>التصنيف</th>
-              <th>السعر</th>
-              <th>المخزون</th>
-              <th>الحالة</th>
-              <th>إجراءات</th>
-            </tr>
-          </thead>
-          <tbody id="productsTable"></tbody>
-        </table>
-      </div>
+function resetForm() {
+  $("productForm").reset();
+  editingId = null;
+  $("active").checked = true;
+  $("stock").value = 0;
+  $("formTitle").textContent = "إضافة منتج جديد";
+  $("cancelEdit").classList.add("hidden");
+}
 
-      <p id="empty" class="empty hidden">لا توجد منتجات مطابقة.</p>
-    </section>
+window.editProduct = editProduct;
+window.deleteProduct = id => {
+  const p = products.find(item => item.id === id);
+  if (p && confirm(`حذف ${p.name}؟`)) {
+    products = products.filter(item => item.id !== id);
+    save();
+    render();
+  }
+};
 
-    <section class="panel">
-      <div class="panel-head">
-        <h2>الطلبات</h2>
-        <button class="secondary" type="button" onclick="loadOrders()">تحديث</button>
-      </div>
+$("productForm").onsubmit = event => {
+  event.preventDefault();
 
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>العميل</th>
-              <th>الهاتف</th>
-              <th>العنوان</th>
-              <th>المنتجات</th>
-              <th>الإجمالي</th>
-              <th>الحالة</th>
-              <th>التاريخ</th>
-            </tr>
-          </thead>
-          <tbody id="ordersTable"></tbody>
-        </table>
-      </div>
+  const item = {
+    id: editingId || Date.now(),
+    name: $("name").value.trim(),
+    category: $("category").value,
+    price: Number($("price").value),
+    stock: Number($("stock").value),
+    image: $("image").value.trim(),
+    description: $("description").value.trim(),
+    active: $("active").checked
+  };
 
-      <p id="emptyOrders" class="empty hidden">لا توجد طلبات حتى الآن.</p>
-    </section>
-  </main>
+  if (editingId) {
+    products = products.map(p => p.id === editingId ? item : p);
+  } else {
+    products.unshift(item);
+  }
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="admin.js"></script>
-</body>
-</html>
+  save();
+  render();
+  resetForm();
+  $("formMessage").textContent = "تم حفظ المنتج بنجاح";
+  setTimeout(() => $("formMessage").textContent = "", 2500);
+};
+
+$("cancelEdit").onclick = resetForm;
+$("search").oninput = render;
+
+if (sessionStorage.getItem(SESSION_KEY) === "1") {
+  showApp();
+}
